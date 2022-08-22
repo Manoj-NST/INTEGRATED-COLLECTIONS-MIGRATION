@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="469px" height="880px" viewBox="0 0 469 880" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 59 (101010) - https://sketch.com -->
+    <title>2759F2B0-BF66-45B0-A3D3-9C74ED21CED9</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="469" height="881"></rect>
+        <radialGradient cx="100%" cy="100%" fx="100%" fy="100%" r="240.139575%" gradientTransform="translate(1.000000,1.000000),scale(0.611806,1.000000),rotate(-151.222450),translate(-1.000000,-1.000000)" id="radialGradient-3">
+            <stop stop-color="#FF9E00" offset="0%"></stop>
+            <stop stop-color="#FFE5D6" offset="31.5369817%"></stop>
+            <stop stop-color="#F3F3F3" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="0%" cy="100%" fx="0%" fy="100%" r="191.614474%" gradientTransform="translate(0.000000,1.000000),scale(0.611806,1.000000),rotate(-31.458526),translate(-0.000000,-1.000000)" id="radialGradient-4">
+            <stop stop-color="#231F20" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="100%" cy="0%" fx="100%" fy="0%" r="214.991926%" gradientTransform="translate(1.000000,0.000000),scale(0.611806,1.000000),rotate(150.450794),translate(-1.000000,-0.000000)" id="radialGradient-5">
+            <stop stop-color="#C4161C" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+        <rect id="path-6" x="-971" y="1" width="1440" height="881"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop_version_4" transform="translate(-971.000000, 0.000000)">
+            <g id="Rectangle-Copy-13" transform="translate(971.000000, -1.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#FFFFFF" opacity="0" xlink:href="#path-1"></use>
+                <g style="mix-blend-mode: overlay;" mask="url(#mask-2)" transform="translate(-251.000000, 441.500000) scale(1, -1) translate(251.000000, -441.500000) ">
+                    <use fill="url(#radialGradient-3)" xlink:href="#path-6"></use>
+                    <use fill="url(#radialGradient-4)" xlink:href="#path-6"></use>
+                    <use fill="url(#radialGradient-5)" xlink:href="#path-6"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

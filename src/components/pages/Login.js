@@ -101,9 +101,7 @@ const LogIn = () => {
                 <div className="card">
                     <div className="form">
                         <div className="left-side">
-                            <img src="https://imgur.com/K230JeW.jpg" />
-
-
+                            <img src="https://imgur.com/K230JeW.jpg." />
                         </div>
                         <div className="right-side">
                             <div className="heading">
