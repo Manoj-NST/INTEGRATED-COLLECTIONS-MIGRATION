@@ -1,29 +1,73 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core';
-import classes from './../pages/Login.css'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React, { useEffect, useState } from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Diamond from '../../assest/collections_login.png';
+import axios from 'axios';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: theme.spacing(2),
 
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '300px',
-        },
-        '& .MuiButtonBase-root': {
-            margin: theme.spacing(2),
-        },
-    },
-}));
+function Copyright(props) {
+    return (
+        <Typography variant="body2" color="text.secondary" align="center" {...props}>
+            {'Copyright © '}
+            <Link color="inherit" href="https://mui.com/">
+                Your Website
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
+
+const theme = createTheme();
+
+// const useStyles = makeStyles(theme => ({
+//     root: {
+//         display: 'flex',
+//         flexDirection: 'column',
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         padding: theme.spacing(2),
+
+//         '& .MuiTextField-root': {
+//             margin: theme.spacing(1),
+//             width: '300px',
+//         },
+//         '& .MuiButtonBase-root': {
+//             margin: theme.spacing(2),
+//         },
+//     },
+// }));
 const LogIn = () => {
-    const classes = useStyles();
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     const data = new FormData(event.currentTarget);
+    //     console.log({
+    //         email: data.get('email'),
+    //         password: data.get('password'),
+    //     });
+    // const classes = useStyles();
     const { useState } = React;
+    const [APIData, setAPIData] = useState([]);
+
+    useEffect(() => {
+        axios.get(`https://60fbca4591156a0017b4c8a7.mockapi.io/fakeData`)
+            .then((response) => {
+                console.log(response.data)
+                setAPIData(response.data);
+            })
+    }, []);
 
     const [eye, seteye] = useState(true);
     const [inpass, setinpass] = useState("password");
@@ -92,65 +136,92 @@ const LogIn = () => {
         }
     }
 
-
-
-
     return (
         <>
-            <div className="container">
-                <div className="card">
-                    <div className="form">
-                        <div className="left-side">
-                            <img src="https://imgur.com/K230JeW.jpg." />
-                        </div>
-                        <div className="right-side">
-                            <div className="heading">
-                                <h3>Log in to MIFIX.</h3>
-
-                            </div>
-                            {/* <div className="social">
-                                <span><i className="fa fa-google"></i>Log in with Google</span>
-                                <span><i className="fa fa-facebook-f"></i>Log in with Facebook</span>
-                            </div> */}
-                            <hr />
-                            <div className="or">
-
-                            </div>
-                            <form onSubmit={submitForm}>
-                                <div className="input-text">
-                                    <input type="text" className={`${wemail ? "text-warning" : ""}`} value={inputText.email} onChange={inputEvent} name="email" />
-                                    <label>Email</label>
-                                    <i className="fa fa-envelope"></i>
-                                </div>
-                                <div className="input-text">
-                                    <input type={inpass} className={` ${warning ? "warning" : ""} ${wpassword ? "text-warning" : ""}`} value={inputText.password} onChange={inputEvent} name="password" />
-                                    <label>Password</label>
-                                    <i className="fa fa-lock"></i>
-                                    <i onClick={Eye} className={`fa ${eye ? "fa-eye-slash" : "fa-eye"}`}></i>
-                                </div>
-
-                                {/* <div className="rem_pass">
-                                    <div className="remember">
-                                        <span onClick={Tick} className={` ${tick ? "green" : ""}`}><i className="fa fa-check"></i></span>
-                                        <p>Remember Me</p>
-                                    </div>
-                                    <a href="#">Forgot your password?</a>
-                                </div> */}
-                                <div className="button">
-                                    <button type="submit">Login</button>
-
-                                </div>
-                            </form>
-                            {/* <div className="register">
-                                <p>Didn't have an account?<a href="#"> Register</a></p>
-                            </div> */}
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ThemeProvider theme={theme}>
+                <Grid container component="main" sx={{ height: '100vh' }}>
+                    <CssBaseline />
+                    <Grid
+                        item
+                        xs={false}
+                        sm={5}
+                        md={7}
+                        sx={{
+                            backgroundImage: 'url('+Diamond+')',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundColor: (t) =>
+                                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                    />
+                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                        <Box
+                            sx={{
+                                my: 8,
+                                mx: 4,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                                <LockOutlinedIcon />
+                            </Avatar>
+                            <Typography component="h1" variant="h5">
+                                Sign in
+                            </Typography>
+                            <Box component="form" noValidate sx={{ mt: 1 }}>
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    autoFocus
+                                />
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox value="remember" color="primary" />}
+                                    label="Remember me"
+                                />
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                >
+                                    Sign In
+                                </Button>
+                                <Grid container>
+                                    <Grid item xs>
+                                        <Link href="#" variant="body2">
+                                            Forgot password?
+                                        </Link>
+                                    </Grid>
+                                    <Grid item>
+                                        <Link href="#" variant="body2">
+                                            {"Don't have an account? Sign Up"}
+                                        </Link>
+                                    </Grid>
+                                </Grid>
+                                <Copyright sx={{ mt: 5 }} />
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </ThemeProvider>
 
 
         </>
