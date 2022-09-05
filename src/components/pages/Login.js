@@ -12,7 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import Diamond from '../../assest/collections_login.png';
+import LoginRight from '../../assest/qwerty.svg';
+
 import axios from 'axios';
 
 
@@ -136,6 +139,14 @@ const LogIn = () => {
         }
     }
 
+    const customTheme = createTheme({
+        palette: {
+            primary: {
+                main: "#262626"
+            }
+        }
+    });
+
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -145,9 +156,9 @@ const LogIn = () => {
                         item
                         xs={false}
                         sm={5}
-                        md={7}
+                        md={8}
                         sx={{
-                            backgroundImage: 'url('+Diamond+')',
+                            backgroundImage: 'url(' + Diamond + ')',
                             backgroundRepeat: 'no-repeat',
                             backgroundColor: (t) =>
                                 t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -155,7 +166,23 @@ const LogIn = () => {
                             backgroundPosition: 'center',
                         }}
                     />
-                    <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                    <Grid
+                        item
+                        xs={12}
+                        sm={8}
+                        md={4}
+                        component={Paper}
+                        elevation={6} square
+                        sx={{
+                            backgroundImage: 'url(' + LoginRight + ')',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundColor: (t) =>
+                                t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                            backgroundSize: '100%',
+                            backgroundPosition: 'center',
+                        }}
+                    >
+                        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                         <Box
                             sx={{
                                 my: 8,
@@ -165,12 +192,6 @@ const LogIn = () => {
                                 alignItems: 'center',
                             }}
                         >
-                            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                                <LockOutlinedIcon />
-                            </Avatar>
-                            <Typography component="h1" variant="h5">
-                                Sign in
-                            </Typography>
                             <Box component="form" noValidate sx={{ mt: 1 }}>
                                 <TextField
                                     margin="normal"
@@ -192,31 +213,20 @@ const LogIn = () => {
                                     id="password"
                                     autoComplete="current-password"
                                 />
-                                <FormControlLabel
+                                {/* <FormControlLabel
                                     control={<Checkbox value="remember" color="primary" />}
                                     label="Remember me"
-                                />
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                >
-                                    Sign In
-                                </Button>
-                                <Grid container>
-                                    <Grid item xs>
-                                        <Link href="#" variant="body2">
-                                            Forgot password?
-                                        </Link>
-                                    </Grid>
-                                    <Grid item>
-                                        <Link href="#" variant="body2">
-                                            {"Don't have an account? Sign Up"}
-                                        </Link>
-                                    </Grid>
-                                </Grid>
-                                <Copyright sx={{ mt: 5 }} />
+                                /> */}
+                                <ThemeProvider theme={customTheme}>
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{ mt: 3, mb: 2 }}
+                                    >
+                                        Sign In
+                                    </Button>
+                                </ThemeProvider>
                             </Box>
                         </Box>
                     </Grid>
