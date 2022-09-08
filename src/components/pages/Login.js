@@ -15,9 +15,11 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { withRouter } from "react-router";
 import { createHashHistory } from 'history'
+
 import { environment } from '../../environments/environment';
 import Diamond from '../../assest/collections_login.png';
 import LoginRight from '../../assest/qwerty.svg';
+
 
 import axios from 'axios';
 
@@ -40,6 +42,10 @@ export const history = createHashHistory();
 
 export default function LogIn(props) {
     const { useState } = React;
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
     const [APIData, setAPIData] = useState([]);
     const history = useHistory();
 
@@ -125,6 +131,9 @@ export default function LogIn(props) {
             password: data.get('password'),
         });
         event.preventDefault();
+        setError(null);
+        setLoading(true);
+
         axios.post(`${environment.apiUrl}/branchManager/login`, { email: data.get('email'),
                     password: data.get('password')
                 }
@@ -132,11 +141,15 @@ export default function LogIn(props) {
             )
             .then(res => {
                 console.log(res);
+                setLoading(false);
                 window.localStorage.setItem("token", res.data.token);
                 history.push("/home");
             })
             .catch(err => {
                 console.log(err);
+                if (error.response.status === 401) setError(error.response.data.message);
+                else setError("Something went wrong. Please try again later.");
+                setLoading(false);
             });
     };
 
