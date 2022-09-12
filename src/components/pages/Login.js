@@ -155,87 +155,86 @@ export default function LogIn(props) {
 
     return (
         <ThemeProvider theme={theme}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
-                <CssBaseline />
-                <Grid
-                    item
-                    xs={false}
-                    sm={5}
-                    md={8}
-                    sx={{
-                        backgroundImage: 'url(' + Diamond + ')',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                />
-                <Grid
-                    item
-                    xs={12}
-                    sm={8}
-                    md={4}
-                    component={Paper}
-                    elevation={6} square
-                    sx={{
-                        backgroundImage: 'url(' + LoginRight + ')',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                        backgroundSize: '100%',
-                        backgroundPosition: 'center',
-                    }}
-                >
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                    <Box
-                        sx={{
-                            my: 8,
-                            mx: 4,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
-                            {/* <FormControlLabel
-                                    control={<Checkbox value="remember" color="primary" />}
-                                    label="Remember me"
-                                /> */}
-                            <ThemeProvider theme={customTheme}>
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                >
-                                    Sign In
-                                </Button>
-                            </ThemeProvider>
-                        </Box>
-                    </Box>
-                </Grid>
+          <Grid container component="main" sx={{ height: '100vh' }}>
+            <CssBaseline />
+            <Grid
+              item
+              xs={false}
+              sm={5}
+              md={8}
+              sx={{
+                backgroundImage: 'url(' + Diamond + ')',
+                backgroundRepeat: 'no-repeat',
+                backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+            <Grid
+              item
+              xs={12}
+              sm={8}
+              md={4}
+              component={Paper}
+              elevation={6}
+              square
+              sx={{
+                backgroundImage: 'url(' + LoginRight + ')',
+                backgroundRepeat: 'no-repeat',
+                backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
+                backgroundSize: '100%',
+                backgroundPosition: 'center',
+              }}
+            >
+              <Box
+                sx={{
+                  my: 45,
+                  mx: 4,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    variant="filled"
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    variant="filled"
+                  />
+                  {/* <FormControlLabel
+                                        control={<Checkbox value="remember" color="primary" />}
+                                        label="Remember me"
+                                    /> */}
+                  <ThemeProvider theme={customTheme}>
+                    <Button 
+                        type="submit" 
+                        fullWidth variant="contained" 
+                        sx={{ mt: 3, mb: 2 }}
+                        >
+                      Sign In
+                    </Button>
+                  </ThemeProvider>
+                </Box>
+              </Box>
             </Grid>
+          </Grid>
         </ThemeProvider>
-    );
+      );
 }

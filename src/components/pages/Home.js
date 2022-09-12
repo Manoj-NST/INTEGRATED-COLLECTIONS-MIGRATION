@@ -1,9 +1,13 @@
 import React from "react";
+import BasicTable from "../foTable/foTable";
+import ResponsiveAppBar from "../Header/header";
 
 const Home = () => {
 return (
 	<div>
-	<h1>Home Page</h1>
+	<ResponsiveAppBar />
+	<br/>
+	<BasicTable />
 	</div>
 );
 };
