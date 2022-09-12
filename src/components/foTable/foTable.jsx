@@ -7,20 +7,27 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid } from '@material-ui/core';
+// import SearchBar from "material-ui-search-bar";
 
 import AttendanceBox from '../attendance/attendance';
 import CollectionWidget from '../collectionWidget/collectionWidget';
+import CashDetails from '../cashDetails/cashDetails';
 
 function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
   return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
 }
 
 const rows = [
-  createData('QWERTY', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('LA LA LA', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('CHAD', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('PABLO', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('Walter White', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('Willy Wonka', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('Chinrasu', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('PABLO ESCOBAR', 420, 0, 6090, 0, 'NA', 'NA', 0),
   createData('KIM JONG UN', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('UnGoppan', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('Michael Rayappan', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('Lalgudi Karuppiah Gandhi', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('GigaCHAD', 420, 0, 6090, 0, 'NA', 'NA', 0),
+  createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0)
 ];
 
 export default function BasicTable() {
@@ -30,6 +37,8 @@ export default function BasicTable() {
       <div><AttendanceBox /></div>
       <br />
       <div><CollectionWidget /></div>
+      <br/>
+      <div><CashDetails /></div>
       </Grid>
       <Grid item xs={10}>
       <TableContainer component={Paper}>

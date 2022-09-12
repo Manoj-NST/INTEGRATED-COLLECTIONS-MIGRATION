@@ -6,10 +6,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';
 
-export default function CollectionWidget() {
+export default function CashDetails() {
   const theme = createTheme({
     status: {
       danger: '#e53e3e',
@@ -37,44 +35,31 @@ export default function CollectionWidget() {
       <Accordion defaultExpanded={true}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
           <Typography>
-            <b>Collection</b>
+            <b>Cash Details</b>
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-            <Stack direction="row" sx={{ color: '#ff2360' }}>
-              <CircularProgress style={{ 
-              position: 'relative',
-              margin: '0 auto' }} 
-              size={80} 
-              variant="determinate" 
-              value={80} color="inherit" />
-            </Stack>
-          <br />
           <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <span>
-                Target
-              </span>
-            </Grid>
-            <Grid item xs={6}>
-              <span>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={10}>
+              <p>
                 <b>API</b>
-              </span>
+              </p>
+              <p>Collected by FOs</p>
             </Grid>
-            <Grid item xs={6}>
-              <span>Achieved</span>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={10}>
+              <p>
+                <b>API</b>
+              </p>
+              <p>Given At Branch</p>
             </Grid>
-            <Grid item xs={6}>
-              <span><b>API</b></span>
-            </Grid>
-            <Grid item xs={6}>
-              <span>Pending</span>
-            </Grid>
-            <Grid item xs={6}>
-              <span><b>API</b></span>
-            </Grid>
-            <Grid item xs={6}>
-              <span>Prediction: <b>NA</b></span>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={10}>
+              <p>
+                <b>API</b>
+              </p>
+              <p>Pending Amount</p>
             </Grid>
           </Grid>
         </AccordionDetails>
