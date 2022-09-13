@@ -17,8 +17,8 @@ import { withRouter } from "react-router";
 import { createHashHistory } from 'history'
 
 import { environment } from '../../environments/environment';
-import Diamond from '../../assest/collections_login.png';
-import LoginRight from '../../assest/qwerty.svg';
+import Diamond from '../../assets/collections_login.png';
+import LoginRight from '../../assets/qwerty.svg';
 
 
 import axios from 'axios';

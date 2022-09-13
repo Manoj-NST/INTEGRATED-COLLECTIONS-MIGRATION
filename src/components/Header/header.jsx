@@ -12,8 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import MifixLogo from '../../assest/logo.png';
-import DashboardIcon from '../../assest/overview-icon.svg';
+import MifixLogo from '../../assets/logo.png';
+import DashboardIcon from '../../assets/overview-icon.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import SimpleAccordion from '../monthlyCollectionPerformance/monthlyCollectionPerformance';
 
