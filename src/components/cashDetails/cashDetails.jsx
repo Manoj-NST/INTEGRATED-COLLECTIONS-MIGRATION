@@ -8,27 +8,6 @@ import Grid from '@mui/material/Grid';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 export default function CashDetails() {
-  const theme = createTheme({
-    status: {
-      danger: '#e53e3e',
-    },
-    palette: {
-      primary: {
-        main: '#0971f1',
-        darker: '#053e85',
-      },
-      neutral: {
-        main: '#000000',
-        contrastText: '#fff',
-      },
-      heaven: {
-        main: '#ffffff',
-      },
-      pale: {
-        main: '#e6b800',
-      },
-    },
-  });
 
   return (
     <div>
@@ -42,21 +21,21 @@ export default function CashDetails() {
           <Grid container spacing={2}>
             <Grid item xs={2}></Grid>
             <Grid item xs={10}>
-              <p>
+              <p style={{color: 'grey'}}>
                 <b>API</b>
               </p>
               <p>Collected by FOs</p>
             </Grid>
             <Grid item xs={2}></Grid>
             <Grid item xs={10}>
-              <p>
+              <p style={{color: 'red'}}>
                 <b>API</b>
               </p>
               <p>Given At Branch</p>
             </Grid>
             <Grid item xs={2}></Grid>
             <Grid item xs={10}>
-              <p>
+              <p style={{color: 'green'}}>
                 <b>API</b>
               </p>
               <p>Pending Amount</p>

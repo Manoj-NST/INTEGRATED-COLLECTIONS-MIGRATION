@@ -46,7 +46,7 @@ export default function AttendanceBox() {
               </span>
             </Grid>
             <Grid item xs={6}>
-              <span>
+              <span style={{color:'#e6b800'}}>
                 <b>NA</b>
               </span>
             </Grid>

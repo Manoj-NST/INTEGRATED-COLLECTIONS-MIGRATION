@@ -68,11 +68,11 @@ export default function SimpleAccordion() {
                 <p>Visited</p>
             </Grid>
             <Grid item xs={1}>
-                <p><b>API</b></p>
+                <p style={{color: '#e6b800'}}><b>API</b></p>
                 <p>DPD</p>
             </Grid>
             <Grid item xs={2}>
-                <p><b>API</b></p>
+                <p style={{color: '#e6b800'}}><b>API</b></p>
                 <p>Rescheduled</p>
             </Grid>
             <Grid item xs={1.5}>
