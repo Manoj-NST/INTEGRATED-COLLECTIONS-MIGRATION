@@ -67,7 +67,7 @@ const ResponsiveAppBar = () => {
       <AppBar position="static" color="neutral">
         <Container maxWidth="xxl">
           <Toolbar disableGutters>
-            <img src={MifixLogo} />
+            <img src={MifixLogo} alt="Mifix Logo"/>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
@@ -108,7 +108,7 @@ const ResponsiveAppBar = () => {
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Button onClick={handleCloseNavMenu}>
-                <img src={DashboardIcon} />
+                <img src={DashboardIcon} alt="Dashboard"/>
               </Button>
             </Box>
 

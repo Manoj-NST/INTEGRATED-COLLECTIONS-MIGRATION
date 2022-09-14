@@ -5,33 +5,10 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Grid from '@mui/material/Grid';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export default function CollectionWidget() {
-  const theme = createTheme({
-    status: {
-      danger: '#e53e3e',
-    },
-    palette: {
-      primary: {
-        main: '#0971f1',
-        darker: '#053e85',
-      },
-      neutral: {
-        main: '#000000',
-        contrastText: '#fff',
-      },
-      heaven: {
-        main: '#ffffff',
-      },
-      pale: {
-        main: '#e6b800',
-      },
-    },
-  });
-
   return (
     <div>
       <Accordion defaultExpanded={true}>

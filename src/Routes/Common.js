@@ -7,6 +7,7 @@ export const getUser = () => {
   
   // return the token from the session storage
   export const getToken = () => {
+    // console.log(sessionStorage.getItem('token'))
     return sessionStorage.getItem('token') || null;
   }
   

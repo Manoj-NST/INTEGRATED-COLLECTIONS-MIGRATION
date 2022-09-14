@@ -1,6 +1,6 @@
 import React from "react";
-import BasicTable from "../foTable/foTable";
-import ResponsiveAppBar from "../Header/header";
+import BasicTable from "../components/foTable/foTable";
+import ResponsiveAppBar from "../components/Header/header";
 
 const Home = () => {
 return (
