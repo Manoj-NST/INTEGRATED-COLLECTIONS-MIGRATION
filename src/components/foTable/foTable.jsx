@@ -7,11 +7,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 // import SearchBar from "material-ui-search-bar";
 
 import AttendanceBox from '../attendance/attendance';
 import CollectionWidget from '../collectionWidget/collectionWidget';
 import CashDetails from '../cashDetails/cashDetails';
+import Calendar from '../calendar/calendar';
 
 function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
   return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
@@ -31,13 +33,23 @@ const rows = [
 ];
 
 export default function BasicTable() {
+  const [selectedRow, setSelectedRow] = React.useState({});
+
+  const history = useHistory();
+
+  const groupPage = () => {
+    history.push("/groupDetails")
+  }
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={2}>
+      <div><Calendar /></div>
+      <br />
       <div><AttendanceBox /></div>
       <br />
       <div><CollectionWidget /></div>
-      <br/>
+      <br />
       <div><CashDetails /></div>
       </Grid>
       <Grid item xs={10}>
@@ -58,8 +70,10 @@ export default function BasicTable() {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              hover = {true}
+              key = {row.name}
+              sx = {{ '&:last-child td, &:last-child th': { border: 0 } }}
+              onClick = {groupPage}
             >
               <TableCell component="th" scope="row">
                 <b>{row.name}</b>

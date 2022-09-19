@@ -3,7 +3,8 @@ import React from 'react';
 function Dashboard(props) {
 
   // handle click event of logout button
-  const handleLogout = () => {    
+  const handleLogout = () => {   
+    window.localStorage.clear(); //clear all localstorage 
     props.history.push('/login');
   }
 

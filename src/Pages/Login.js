@@ -36,21 +36,16 @@ export default function LogIn(props) {
 
     const handleSubmit = (event) => {
         const data = new FormData(event.currentTarget);
-        console.log(data);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
         event.preventDefault();
         setError(null);
-
         axios.post(`${environment.apiUrl}/branchManager/login`, { email: data.get('email'),
                     password: data.get('password')
                 }
             )
             .then(res => {
-                console.log(res);
-                window.localStorage.setItem("token", res.data.token);
+              console.log(res.data)
+                window.localStorage.setItem('token', res.data.token);
+                window.localStorage.setItem('user', res.data.userInfo.bmId)
                 history.push("/home");
             })
             .catch(err => {

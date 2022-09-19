@@ -11,64 +11,69 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import {useHistory} from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MifixLogo from '../../assets/logo.png';
 import DashboardIcon from '../../assets/overview-icon.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import SimpleAccordion from '../monthlyCollectionPerformance/monthlyCollectionPerformance';
+// import { getUser } from '../../Routes/Common';
 
 const pages = ['{DashboardIcon}'];
-const settings = ['E-Mail / FO_ID', 'Logout'];
+
 
 const ResponsiveAppBar = () => {
+  const history = useHistory();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
+    window.localStorage.getItem('user');
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
+  const logOut = () => {
+    handleCloseUserMenu();
+    window.localStorage.clear(); 
+    history.push("/login");
+  }
+
+
   const theme = createTheme({
     status: {
-      danger: '#e53e3e',
+      danger: '#E53E3E',
     },
     palette: {
       primary: {
-        main: '#0971f1',
-        darker: '#053e85',
+        main: '#0971F1',
+        darker: '#053E85',
       },
       neutral: {
         main: '#000000',
         contrastText: '#fff',
       },
       heaven: {
-        main: '#ffffff',
+        main: '#FFFFFF',
       },
     },
   });
-
   function refreshPage() {
     window.location.reload(false);
   }
-
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static" color="neutral">
         <Container maxWidth="xxl">
           <Toolbar disableGutters>
-            <img src={MifixLogo} alt="Mifix Logo"/>
-
+            <img src={MifixLogo} alt="Mifix"/>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
@@ -105,17 +110,14 @@ const ResponsiveAppBar = () => {
                 ))}
               </Menu>
             </Box>
-
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Button onClick={handleCloseNavMenu}>
-                <img src={DashboardIcon} alt="Dashboard"/>
+                <img src={DashboardIcon} alt="Mifix"/>
               </Button>
             </Box>
-
             <Button>
               <SearchIcon fontSize="large" color="heaven"></SearchIcon>
             </Button>
-
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -138,11 +140,9 @@ const ResponsiveAppBar = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem key="logout" onClick={logOut}>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>

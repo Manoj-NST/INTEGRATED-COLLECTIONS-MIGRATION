@@ -4,23 +4,20 @@ import Login from './Pages/Login';
 import Dashboard from './Pages/Dashboard';
 import Home from './Pages/Home';
 import PrivateRoute from './Routes/PrivateRoute';
-import PublicRoute from './Routes/PublicRoute';
+import GroupDetails from './Pages/Group';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <div>
-          {/* <div className="header">
-            <NavLink exact activeClassName="active" to="/">Home</NavLink>
-            <NavLink activeClassName="active" to="/login">Login</NavLink><small>(Access without token only)</small>
-            <NavLink activeClassName="active" to="/dashboard">Dashboard</NavLink><small>(Access with token only)</small>
-          </div> */}
           <div className="content">
             <Switch>
               <Route exact path="/" component={Login} />
-              <PublicRoute path="/home" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <PrivateRoute path="/home" component={Home} />
               <PrivateRoute path="/dashboard" component={Dashboard} />
+              <Route path="/groupDetails" component={GroupDetails} />
             </Switch>
           </div>
         </div>
