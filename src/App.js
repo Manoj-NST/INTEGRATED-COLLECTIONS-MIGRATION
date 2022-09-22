@@ -5,8 +5,14 @@ import Dashboard from './Pages/Dashboard';
 import Home from './Pages/Home';
 import PrivateRoute from './Routes/PrivateRoute';
 import GroupDetails from './Pages/Group';
+import { setAuthToken } from './service/auth.header';
 
 function App() {
+
+  const token = window.localStorage.getItem("token");
+  if(token){
+    setAuthToken(token);
+  }
   return (
     <div className="App">
       <BrowserRouter>

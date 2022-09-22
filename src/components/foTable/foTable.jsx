@@ -8,7 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Grid } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -18,7 +17,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import AttendanceBox from '../attendance/attendance';
 import CollectionWidget from '../collectionWidget/collectionWidget';
 import CashDetails from '../cashDetails/cashDetails';
-import Calendar from '../calendar/calendar';
 
 function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
   return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
@@ -39,7 +37,6 @@ const rows = [
 
 export default function BasicTable() {
   const [value, setValue] = React.useState ();
-  const [selectedRow, setSelectedRow] = React.useState({});
 
   const history = useHistory();
 

@@ -9,20 +9,17 @@ import { useHistory } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { createHashHistory } from 'history'
 
-import { environment } from '../environments/environment';
 import Diamond from '../../src/assets/collections_login.png'
 import LoginRight from '../../src/assets/qwerty.svg';
-
-
-import axios from 'axios';
+import { login } from '../service/auth.service';
 
 
 const theme = createTheme();
 export const history = createHashHistory();
 
 export default function LogIn(props) {
+
     const { useState } = React;
-    const [error, setError] = useState(null);
      useState([]);
     const history = useHistory();
 
@@ -35,24 +32,13 @@ export default function LogIn(props) {
     });
 
     const handleSubmit = (event) => {
-        const data = new FormData(event.currentTarget);
-        event.preventDefault();
-        setError(null);
-        axios.post(`${environment.apiUrl}/branchManager/login`, { email: data.get('email'),
-                    password: data.get('password')
-                }
-            )
-            .then(res => {
-              console.log(res.data)
-                window.localStorage.setItem('token', res.data.token);
-                window.localStorage.setItem('user', res.data.userInfo.bmId)
-                history.push("/home");
-            })
-            .catch(err => {
-                console.log(err);
-                if (error.response.status === 401) setError(error.response.data.message);
-                else setError("Something went wrong. Please try again later.");
-            });
+      const data = new FormData(event.currentTarget);
+      event.preventDefault();
+      login(data.get('email'),data.get('password')).then(
+        () => {
+          history.push("/home");
+        }
+      )
     };
 
     return (

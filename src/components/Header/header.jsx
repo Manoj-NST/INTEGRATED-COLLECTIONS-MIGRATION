@@ -17,7 +17,7 @@ import MifixLogo from '../../assets/logo.png';
 import DashboardIcon from '../../assets/overview-icon.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import SimpleAccordion from '../monthlyCollectionPerformance/monthlyCollectionPerformance';
-// import { getUser } from '../../Routes/Common';
+import { logout } from '../../service/auth.service';
 
 const pages = ['{DashboardIcon}'];
 
@@ -41,8 +41,8 @@ const ResponsiveAppBar = () => {
   };
 
   const logOut = () => {
+    logout();
     handleCloseUserMenu();
-    window.localStorage.clear(); 
     history.push("/login");
   }
 
