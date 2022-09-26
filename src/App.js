@@ -1,82 +1,35 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Login from './Pages/Login';
+import Dashboard from './Pages/Dashboard';
+import Home from './Pages/Home';
+import PrivateRoute from './Routes/PrivateRoute';
+import GroupDetails from './Pages/Group';
+import { setAuthToken } from './service/auth.header';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.spacing(2),
+function App() {
 
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '300px',
-    },
-    '& .MuiButtonBase-root': {
-      margin: theme.spacing(2),
-    },
-  },
-}));
-
-const App = ({ handleClose }) => {
-  const classes = useStyles();
-  // create state variables for each input
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(firstName, lastName, email, password);
-    handleClose();
-  };
-
+  const token = window.localStorage.getItem("token");
+  if(token){
+    setAuthToken(token);
+  }
   return (
-    <form className={classes.root} onSubmit={handleSubmit}>
-      <TextField
-        label="First Name"
-        variant="filled"
-        required
-        value={firstName}
-        onChange={e => setFirstName(e.target.value)}
-      />
-      <TextField
-        label="Last Name"
-        variant="filled"
-        required
-        value={lastName}
-        onChange={e => setLastName(e.target.value)}
-      />
-      <TextField
-        label="Email"
-        variant="filled"
-        type="email"
-        required
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <TextField
-        label="Password"
-        variant="filled"
-        type="password"
-        required
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <div>
-        <Button variant="contained" onClick={handleClose}>
-          Cancel
-        </Button>
-        <Button type="submit" variant="contained" color="primary">
-          Signup
-        </Button>
-      </div>
-    </form>
+    <div className="App">
+      <BrowserRouter>
+        <div>
+          <div className="content">
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route exact path="/login" component={Login} />
+              <PrivateRoute path="/home" component={Home} />
+              <PrivateRoute path="/dashboard" component={Dashboard} />
+              <Route path="/groupDetails" component={GroupDetails} />
+            </Switch>
+          </div>
+        </div>
+      </BrowserRouter>
+    </div>
   );
-};
+}
 
 export default App;
