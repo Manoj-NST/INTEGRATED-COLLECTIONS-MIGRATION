@@ -8,7 +8,6 @@ import GroupDetails from './Pages/Group';
 import { setAuthToken } from './service/auth.header';
 
 function App() {
-
   const token = window.localStorage.getItem("token");
   if(token){
     setAuthToken(token);
@@ -19,9 +18,8 @@ function App() {
         <div>
           <div className="content">
             <Switch>
-              <Route exact path="/" component={Login} />
               <Route exact path="/login" component={Login} />
-              <PrivateRoute path="/home" component={Home} />
+              <PrivateRoute path="/" component={Home} />
               <PrivateRoute path="/dashboard" component={Dashboard} />
               <Route path="/groupDetails" component={GroupDetails} />
             </Switch>

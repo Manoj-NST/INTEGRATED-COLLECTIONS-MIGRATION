@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,7 +12,7 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import SearchBar from "material-ui-search-bar";
+import SearchBar from 'material-ui-search-bar';
 
 import AttendanceBox from '../attendance/attendance';
 import CollectionWidget from '../collectionWidget/collectionWidget';
@@ -22,7 +22,7 @@ function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pe
   return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
 }
 
-const rows = [
+const originalRows = [
   createData('Walter White', 420, 0, 6090, 0, 'NA', 'NA', 0),
   createData('Willy Wonka', 420, 0, 6090, 0, 'NA', 'NA', 0),
   createData('Chinrasu', 420, 0, 6090, 0, 'NA', 'NA', 0),
@@ -32,17 +32,32 @@ const rows = [
   createData('Michael Rayappan', 420, 0, 6090, 0, 'NA', 'NA', 0),
   createData('Lalgudi Karuppiah Gandhi', 420, 0, 6090, 0, 'NA', 'NA', 0),
   createData('GigaCHAD', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0)
+  createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0),
 ];
 
 export default function BasicTable() {
-  const [value, setValue] = React.useState ();
+  const [value, setValue] = React.useState();
 
   const history = useHistory();
 
   const groupPage = () => {
-    history.push("/groupDetails")
-  }
+    history.push('/groupDetails');
+  };
+
+  const [searched, setSearched] = useState('');
+  const [rows, setRows] = useState(originalRows);
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = originalRows.filter((row) => {
+      return row.name.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setRows(filteredRows);
+  };
+
+  const cancelSearch = () => {
+    setSearched('');
+    requestSearch(searched);
+  };
 
   return (
     <Grid container spacing={3}>
@@ -60,50 +75,63 @@ export default function BasicTable() {
           </LocalizationProvider>
         </div>
         <br />
-        <div><AttendanceBox /></div>
+        <div>
+          <AttendanceBox />
+        </div>
         <br />
-        <div><CollectionWidget /></div>
+        <div>
+          <CollectionWidget />
+        </div>
         <br />
-        <div><CashDetails /></div>
+        <div>
+          <CashDetails />
+        </div>
       </Grid>
       <Grid item xs={10}>
-        <TableContainer component={Paper}>
-          <Table sx={{ minwidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>NAME</TableCell>
-                <TableCell align="center"># OF CUSTOMERS</TableCell>
-                <TableCell align="center">COLLECTED</TableCell>
-                <TableCell align="center">DPD</TableCell>
-                <TableCell align="center">RESCHEDULED</TableCell>
-                <TableCell align="center">TARGET</TableCell>
-                <TableCell align="center">PENDING</TableCell>
-                <TableCell align="center">GIVEN AT BRANCH</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  hover={true}
-                  key={row.name}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  onClick={groupPage}
-                >
-                  <TableCell component="th" scope="row">
-                    <b>{row.name}</b>
-                  </TableCell>
-                  <TableCell align="center">{row.noOfCustomers}</TableCell>
-                  <TableCell align="center">{row.collected}</TableCell>
-                  <TableCell align="center">{row.dpd}</TableCell>
-                  <TableCell align="center">{row.rescheduled}</TableCell>
-                  <TableCell align="center">{row.target}</TableCell>
-                  <TableCell align="center">{row.pending}</TableCell>
-                  <TableCell align="center">{row.givenAtBranch}</TableCell>
+        <Paper>
+          <SearchBar
+            value={searched}
+            onChange={(searchVal) => requestSearch(searchVal)}
+            onCancelSearch={() => cancelSearch()}
+          />
+          <TableContainer component={Paper}>
+            <Table sx={{ minwidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>NAME</TableCell>
+                  <TableCell align="center"># OF CUSTOMERS</TableCell>
+                  <TableCell align="center">COLLECTED</TableCell>
+                  <TableCell align="center">DPD</TableCell>
+                  <TableCell align="center">RESCHEDULED</TableCell>
+                  <TableCell align="center">TARGET</TableCell>
+                  <TableCell align="center">PENDING</TableCell>
+                  <TableCell align="center">GIVEN AT BRANCH</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow
+                    hover={true}
+                    key={row.name}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    onClick={groupPage}
+                  >
+                    <TableCell component="th" scope="row">
+                      <b>{row.name}</b>
+                    </TableCell>
+                    <TableCell align="center">{row.noOfCustomers}</TableCell>
+                    <TableCell align="center">{row.collected}</TableCell>
+                    <TableCell align="center">{row.dpd}</TableCell>
+                    <TableCell align="center">{row.rescheduled}</TableCell>
+                    <TableCell align="center">{row.target}</TableCell>
+                    <TableCell align="center">{row.pending}</TableCell>
+                    <TableCell align="center">{row.givenAtBranch}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
       </Grid>
     </Grid>
   );

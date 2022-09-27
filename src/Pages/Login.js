@@ -22,7 +22,6 @@ export default function LogIn(props) {
     const { useState } = React;
      useState([]);
     const history = useHistory();
-
     const customTheme = createTheme({
         palette: {
             primary: {
@@ -36,7 +35,7 @@ export default function LogIn(props) {
       event.preventDefault();
       login(data.get('email'),data.get('password')).then(
         () => {
-          history.push("/home");
+          history.push("/");
         }
       )
     };

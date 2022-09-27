@@ -16,7 +16,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MifixLogo from '../../assets/logo.png';
 import DashboardIcon from '../../assets/overview-icon.svg';
 import SearchIcon from '@mui/icons-material/Search';
-import SimpleAccordion from '../monthlyCollectionPerformance/monthlyCollectionPerformance';
 import { logout } from '../../service/auth.service';
 
 const pages = ['{DashboardIcon}'];
@@ -65,8 +64,10 @@ const ResponsiveAppBar = () => {
       },
     },
   });
-  function refreshPage() {
-    window.location.reload(false);
+
+  const redirect = useHistory();
+  const homePage = () => {
+    redirect.push("/home")
   }
   return (
     <ThemeProvider theme={theme}>
@@ -148,11 +149,10 @@ const ResponsiveAppBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <Button variant="filled" color="neutral" onClick={refreshPage}>
+      <Button variant="filled" color="neutral" onClick={homePage}>
         <Typography fontSize="large">Dashboard</Typography>
       </Button>
       <br />
-      <SimpleAccordion />
     </ThemeProvider>
   );
 };
