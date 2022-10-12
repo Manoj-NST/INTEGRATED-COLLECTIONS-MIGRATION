@@ -1,20 +1,19 @@
 import axios from "axios";
 import { environment } from "../environments/environment";
 import { setAuthToken } from "./auth.header";
-import UserService from "./user.service";
-
-export const login = (email, password) => {
+// import UserService from "./user.service";
+export const login = (bmId, password) => {
     return axios
         .post(`${environment.apiUrl}/branchManager/login`, {
-            email,
+            bmId,
             password
         }
     )
     .then((res) => {
-        if(res.data.token) {
-            window.localStorage.setItem("user",JSON.stringify(res.data));
-            window.localStorage.setItem("token",res.data.token)
-            const token = res.data.token;
+        if(res.data.data.token) {
+            window.localStorage.setItem("user",JSON.stringify(res.data.data));
+            window.localStorage.setItem("token",res.data.data.token)
+            const token = res.data.data.token;
             setAuthToken(token);
         }
         return res.data;
@@ -33,12 +32,16 @@ export const getUser = () => {
 }
 
 export const getToken = () => {
-    UserService.getFoInfo().then(
-        res => {
-            console.log(res.data[0]);
-        }
-    )
-
+    // UserService.getFoInfo().then(
+    //     res => {
+    //         console.log(res.data[0]);
+    //     }
+    // )
+    // UserService.getDashboardMonthlyCollections().then(
+    //     response => {
+    //         console.log(response);
+    //     }
+    // )
     return localStorage.getItem('token') || null;
   }
 

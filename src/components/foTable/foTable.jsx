@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+	import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,23 +17,23 @@ import SearchBar from 'material-ui-search-bar';
 import AttendanceBox from '../attendance/attendance';
 import CollectionWidget from '../collectionWidget/collectionWidget';
 import CashDetails from '../cashDetails/cashDetails';
+import userService from '../../service/user.service';
+  // function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
+  //   return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
+  // }
 
-function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
-  return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
-}
-
-const originalRows = [
-  createData('Walter White', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Willy Wonka', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Chinrasu', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('PABLO ESCOBAR', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('KIM JONG UN', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('UnGoppan', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Michael Rayappan', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Lalgudi Karuppiah Gandhi', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('GigaCHAD', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0),
-];
+// const originalRows = [
+//   createData('Walter White', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('Willy Wonka', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('Chinrasu', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('PABLO ESCOBAR', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('KIM JONG UN', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('UnGoppan', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('Michael Rayappan', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('Lalgudi Karuppiah Gandhi', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('GigaCHAD', 420, 0, 6090, 0, 'NA', 'NA', 0),
+//   createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0),
+// ];
 
 export default function BasicTable() {
   const [value, setValue] = React.useState();
@@ -45,19 +45,33 @@ export default function BasicTable() {
   };
 
   const [searched, setSearched] = useState('');
-  const [rows, setRows] = useState(originalRows);
+  // const [rows, setRows] = useState(originalRows);
 
-  const requestSearch = (searchedVal) => {
-    const filteredRows = originalRows.filter((row) => {
-      return row.name.toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    setRows(filteredRows);
-  };
+  // const requestSearch = (searchedVal) => {
+  //   const filteredRows = originalRows.filter((data) => {
+  //     return data.foName.toLowerCase().includes(searchedVal.toLowerCase());
+  //   });
+  //   // setRows(filteredRows);
+  // };
 
   const cancelSearch = () => {
     setSearched('');
-    requestSearch(searched);
+    // requestSearch(searched);
   };
+
+
+
+  const [data, setData] = useState([]);
+  const getTeamTable = () => {
+    userService.getTeamTable()
+    .then(res => {
+      setData(res.data.data)
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
+  useEffect(() => getTeamTable(),[])
 
   return (
     <Grid container spacing={3}>
@@ -65,6 +79,7 @@ export default function BasicTable() {
         <div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
+              fixedHeight
               label="Today"
               value={value}
               onChange={(newValue) => {
@@ -91,7 +106,7 @@ export default function BasicTable() {
         <Paper>
           <SearchBar
             value={searched}
-            onChange={(searchVal) => requestSearch(searchVal)}
+            // onChange={(searchVal) => requestSearch(searchVal)}
             onCancelSearch={() => cancelSearch()}
           />
           <TableContainer component={Paper}>
@@ -109,23 +124,23 @@ export default function BasicTable() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {data.map((list) => (
                   <TableRow
-                    hover={true}
-                    key={row.name}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     onClick={groupPage}
+                    hover={true}
+                    key = {list.foName} // key={row.name}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      <b>{row.name}</b>
+                      <b>{list.foName}</b>
                     </TableCell>
-                    <TableCell align="center">{row.noOfCustomers}</TableCell>
-                    <TableCell align="center">{row.collected}</TableCell>
-                    <TableCell align="center">{row.dpd}</TableCell>
-                    <TableCell align="center">{row.rescheduled}</TableCell>
-                    <TableCell align="center">{row.target}</TableCell>
-                    <TableCell align="center">{row.pending}</TableCell>
-                    <TableCell align="center">{row.givenAtBranch}</TableCell>
+                    <TableCell align="center">{list.customers}</TableCell>
+                    <TableCell align="center">{list.collected}</TableCell>
+                    <TableCell align="center">{list.DPD}</TableCell>
+                    <TableCell align="center">{list.Reschedule}</TableCell>
+                    <TableCell align="center">NA</TableCell>
+                    <TableCell align="center">NA</TableCell>
+                    <TableCell align="center">{list.GivenAtBranch}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

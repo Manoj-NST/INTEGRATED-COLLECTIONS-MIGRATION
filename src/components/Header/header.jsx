@@ -65,13 +65,9 @@ const ResponsiveAppBar = () => {
     },
   });
 
-  const redirect = useHistory();
-  const homePage = () => {
-    redirect.push("/home")
-  }
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" color="neutral">
+      <AppBar position="static" style={{backgroundColor:"black"}}>
         <Container maxWidth="xxl">
           <Toolbar disableGutters>
             <img src={MifixLogo} alt="Mifix"/>
@@ -149,10 +145,6 @@ const ResponsiveAppBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <Button variant="filled" color="neutral" onClick={homePage}>
-        <Typography fontSize="large">Dashboard</Typography>
-      </Button>
-      <br />
     </ThemeProvider>
   );
 };

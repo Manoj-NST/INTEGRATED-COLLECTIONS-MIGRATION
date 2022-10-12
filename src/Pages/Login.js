@@ -33,9 +33,9 @@ export default function LogIn(props) {
     const handleSubmit = (event) => {
       const data = new FormData(event.currentTarget);
       event.preventDefault();
-      login(data.get('email'),data.get('password')).then(
+      login(data.get('bmId'),data.get('password')).then(
         () => {
-          history.push("/");
+          history.push("/home");
         }
       )
     };
@@ -87,10 +87,10 @@ export default function LogIn(props) {
                     margin="normal"
                     required
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
+                    id="bmId"
+                    label="BM ID"
+                    name="bmId"
+                    autoComplete="bmId"
                     autoFocus
                     variant="filled"
                   />

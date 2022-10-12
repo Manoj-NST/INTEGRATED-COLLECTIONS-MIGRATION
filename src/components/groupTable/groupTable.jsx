@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,31 +11,55 @@ import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import SearchBar from "material-ui-search-bar";
-
+import SearchBar from 'material-ui-search-bar';
+import Drawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
 import GroupAttendance from '../attendanceGroup/attendanceGroup';
 import CollectionWidget from '../collectionWidget/collectionWidget';
-
+import MemberDetails from '../memberDetails/memberDetails';
 
 function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
   return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
 }
 
-const rows = [
+const originalRows = [
   createData('Walter White', 420, 0, 6090, 0, 'NA', 'NA', 0),
   createData('Willy Wonka', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Chinrasu', 420, 0, 6090, 0, 'NA', 'NA', 0),
   createData('PABLO ESCOBAR', 420, 0, 6090, 0, 'NA', 'NA', 0),
   createData('KIM JONG UN', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('UnGoppan', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Michael Rayappan', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Lalgudi Karuppiah Gandhi', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('GigaCHAD', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0)
+  createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0),
 ];
 
 export default function GroupTable() {
-  const [value, setValue] = React.useState ();
+  const [value, setValue] = React.useState();
+
+  const [searched, setSearched] = useState('');
+  const [rows, setRows] = useState(originalRows);
+
+  const requestSearch = (searchedVal) => {
+    const filteredRows = originalRows.filter((row) => {
+      return row.name.toLowerCase().includes(searchedVal.toLowerCase());
+    });
+    setRows(filteredRows);
+  };
+  const cancelSearch = () => {
+    setSearched('');
+    requestSearch(searched);
+  };
+
+  //   SIDEBAR / DRAWER
+  const [state, setState] = React.useState({});
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+  };
+  const list = (anchor) => (
+    <Box sx={{ minWidth: 400 }} onClick={toggleDrawer(anchor, false)}>
+      <MemberDetails />
+    </Box>
+  );
 
   return (
     <Grid container spacing={3}>
@@ -59,6 +83,11 @@ export default function GroupTable() {
         <br />
       </Grid>
       <Grid item xs={10}>
+        <SearchBar
+          value={searched}
+          onChange={(searchVal) => requestSearch(searchVal)}
+          onCancelSearch={() => cancelSearch()}
+        />
         <TableContainer component={Paper}>
           <Table sx={{ minwidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -75,22 +104,28 @@ export default function GroupTable() {
             </TableHead>
             <TableBody>
               {rows.map((row) => (
-                <TableRow
-                  hover={true}
-                  key={row.name}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    <b>{row.name}</b>
-                  </TableCell>
-                  <TableCell align="center">{row.noOfCustomers}</TableCell>
-                  <TableCell align="center">{row.collected}</TableCell>
-                  <TableCell align="center">{row.dpd}</TableCell>
-                  <TableCell align="center">{row.rescheduled}</TableCell>
-                  <TableCell align="center">{row.target}</TableCell>
-                  <TableCell align="center">{row.pending}</TableCell>
-                  <TableCell align="center">{row.givenAtBranch}</TableCell>
-                </TableRow>
+                <React.Fragment key={'right'}>
+                  <TableRow
+                    hover={true}
+                    key={row.name}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    onClick={toggleDrawer('right', true)}
+                  >
+                    <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
+                      {list('right')}
+                    </Drawer>
+                    <TableCell component="th" scope="row">
+                      <b>{row.name}</b>
+                    </TableCell>
+                    <TableCell align="center">{row.noOfCustomers}</TableCell>
+                    <TableCell align="center">{row.collected}</TableCell>
+                    <TableCell align="center">{row.dpd}</TableCell>
+                    <TableCell align="center">{row.rescheduled}</TableCell>
+                    <TableCell align="center">{row.target}</TableCell>
+                    <TableCell align="center">{row.pending}</TableCell>
+                    <TableCell align="center">{row.givenAtBranch}</TableCell>
+                  </TableRow>
+                </React.Fragment>
               ))}
             </TableBody>
           </Table>

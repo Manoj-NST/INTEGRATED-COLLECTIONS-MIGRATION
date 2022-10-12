@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://collections-api.mifix.io/api/v1',
+    apiUrl: 'https://collectionsuat-api.mifix.io/api/v1',
   };
   
   /*
