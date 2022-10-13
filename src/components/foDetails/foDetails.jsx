@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
@@ -14,9 +15,11 @@ import Popover from '@mui/material/Popover';
 import Drawer from '@mui/material/Drawer';
 
 import CollectCash from '../collectCash/collectCash';
+import userService from '../../service/user.service';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+
 
   return (
     <div
@@ -69,6 +72,17 @@ export default function FullWidthTabs() {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
+  const [ value1, setValue1 ] = React.useState('');
+  const getFoInfo = () => {
+    userService.getFoInfo()
+    .then(res => {
+      setValue1(res.data.data.dashboardfoinfo)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  useEffect(() => getFoInfo(), []);
   //   SIDEBAR / DRAWER
   const [state, setState] = React.useState({});
   const toggleDrawer = (anchor, open) => (event) => {
@@ -96,7 +110,7 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="FO NAME" {...a11yProps(0)} />
+          <Tab label={value1.foName} {...a11yProps(0)} />
         </Tabs>
       </AppBar>
       <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value} onChangeIndex={handleChangeIndex}>
@@ -105,25 +119,25 @@ export default function FullWidthTabs() {
             <Grid item xs={3}>
               <p>Center Name</p>
               <p>
-                <b>API</b>
+                <b>{value1.centerName}</b>
               </p>
             </Grid>
             <Grid item xs={3}>
               <p>FO ID</p>
               <p>
-                <b>API</b>
+                <b>{value1.foId}</b>
               </p>
             </Grid>
             <Grid item xs={3}>
               <p>Joined Date</p>
               <p>
-                <b>API</b>
+                <b>{value1.foJoindate}</b>
               </p>
             </Grid>
             <Grid item xs={2}>
               <p>FO MOBILE</p>
               <p>
-                <b>API</b>
+                <b>{value1.foMobile}</b>
               </p>
             </Grid>
             <Grid item xs={1} align="right">
@@ -146,7 +160,7 @@ export default function FullWidthTabs() {
                       <Button style={{ color: 'black' }} onClick={toggleDrawer(anchor, true)}>
                         Collect Cash
                       </Button>
-                      <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                      <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)} variant={"persistent"} >
                         {list(anchor)}
                       </Drawer>
                     </React.Fragment>

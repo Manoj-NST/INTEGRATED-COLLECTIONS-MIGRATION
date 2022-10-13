@@ -15,7 +15,6 @@ export default function SimpleAccordion() {
   const getDashboardMonthlyCollections = () => {
     userService.getDashboardMonthlyCollections()
     .then(res => {
-      // console.log(res.data)
       setValue(res.data.data.dashboardmonthlycollections)
     }).catch(err=>{
       console.log(err)

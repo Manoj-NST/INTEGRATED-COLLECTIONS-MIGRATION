@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useEffect,useState} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,6 +6,8 @@ import TableRow from '@mui/material/TableRow';
 import { Grid } from '@material-ui/core';
 import Divider from '@mui/material/Divider';
 import { Typography } from '@mui/material';
+import userService from '../../service/user.service';
+import { CollectionsOutlined } from '@material-ui/icons';
 
 export default function CollectCash() {
   function createData(name, payment, amount) {
@@ -20,6 +22,20 @@ export default function CollectCash() {
     createData('Skyler White', 'Partial Payment', 4200),
   ];
 
+  const [value, setValue] = useState([]);
+  const [value1, setValue1] = useState([]);
+  const getCollectCash = () => {
+    userService.getCollectCash()
+    .then(res => {
+      setValue(res.data.data.CollectCash);
+      setValue1(res.data.data.CollectCash.data)
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
+  useEffect(() => getCollectCash(),[])
+
   return (
     <div>
       <div>
@@ -32,21 +48,20 @@ export default function CollectCash() {
         <Divider m={4} pt={5} />
       </div>
       <div>
-        <p style={{ margin: '5px' }}>From</p>
         <br />
         <Grid container sx={{ pl: '2rem' }}>
           <Grid item xs={1}></Grid>
           <Grid item xs={5}>
             <p>
-              <b>FO NAME</b>
+              <b>{value.totalDeposited}</b>
             </p>
-            <p>Branch Name</p>
+            <p>Total Deposited</p>
           </Grid>
           <Grid item xs={5}>
             <p>
-              <b>₹30,230</b>
+              <b>{value.count}</b>
             </p>
-            <p>Total Cash in Hand</p>
+            <p>Total Receipts</p>
           </Grid>
         </Grid>
         <br />
@@ -59,13 +74,14 @@ export default function CollectCash() {
       <div>
         <Table sx={{ minwidth: 200 }} aria-label="simple table">
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            {value1.map((list) => (
+              <TableRow key={list.groupName} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {list.groupName}
                 </TableCell>
-                <TableCell align="center">{row.payment}</TableCell>
-                <TableCell align="center">{row.amount}</TableCell>
+                <TableCell align="center">{list.productType}</TableCell>
+                <TableCell align="center">{list.emiStatus}</TableCell>
+                <TableCell align="center">{list.collected}</TableCell>
               </TableRow>
             ))}
           </TableBody>

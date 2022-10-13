@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,6 +17,7 @@ import Box from '@mui/material/Box';
 import GroupAttendance from '../attendanceGroup/attendanceGroup';
 import CollectionWidget from '../collectionWidget/collectionWidget';
 import MemberDetails from '../memberDetails/memberDetails';
+import userService from '../../service/user.service';
 
 function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
   return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
@@ -61,6 +62,19 @@ export default function GroupTable() {
     </Box>
   );
 
+  const [data, setData] = useState([]);
+  const getDashboardGroupDetails = () => {
+    userService.getDashboardGroupDetails()
+    .then(res => {
+      setData(res.data.data)
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
+  useEffect(() => getDashboardGroupDetails(),[])
+
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={2}>
@@ -92,38 +106,34 @@ export default function GroupTable() {
           <Table sx={{ minwidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>NAME</TableCell>
-                <TableCell align="center"># OF CUSTOMERS</TableCell>
+                <TableCell align="left">GROUP NAME</TableCell>
+                <TableCell align="center">PRODUCT NAME</TableCell>
                 <TableCell align="center">COLLECTED</TableCell>
                 <TableCell align="center">DPD</TableCell>
-                <TableCell align="center">RESCHEDULED</TableCell>
-                <TableCell align="center">TARGET</TableCell>
-                <TableCell align="center">PENDING</TableCell>
-                <TableCell align="center">GIVEN AT BRANCH</TableCell>
+                <TableCell align="center">COLLECTED / REMAINING</TableCell>
+                <TableCell align="center">TOTAL EMI</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {data.map((details) => (
                 <React.Fragment key={'right'}>
                   <TableRow
                     hover={true}
-                    key={row.name}
+                    key={details.groupName}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     onClick={toggleDrawer('right', true)}
                   >
-                    <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
+                    <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)} BackdropProps={{ invisible: true }}>
                       {list('right')}
                     </Drawer>
-                    <TableCell component="th" scope="row">
-                      <b>{row.name}</b>
+                    <TableCell component="th" scope="row" align="left">
+                      <b>{details.groupName}</b>
                     </TableCell>
-                    <TableCell align="center">{row.noOfCustomers}</TableCell>
-                    <TableCell align="center">{row.collected}</TableCell>
-                    <TableCell align="center">{row.dpd}</TableCell>
-                    <TableCell align="center">{row.rescheduled}</TableCell>
-                    <TableCell align="center">{row.target}</TableCell>
-                    <TableCell align="center">{row.pending}</TableCell>
-                    <TableCell align="center">{row.givenAtBranch}</TableCell>
+                    <TableCell align="center">{details.productType}</TableCell>
+                    <TableCell align="center">{details.collected}</TableCell>
+                    <TableCell align="center">{details.DPD}</TableCell>
+                    <TableCell align="center">{details.collected} / {details.EMI - details.collected} </TableCell>
+                    <TableCell align="center">{details.EMI}</TableCell>
                   </TableRow>
                 </React.Fragment>
               ))}

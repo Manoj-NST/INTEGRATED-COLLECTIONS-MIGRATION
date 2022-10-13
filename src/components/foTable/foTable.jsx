@@ -37,12 +37,22 @@ import userService from '../../service/user.service';
 
 export default function BasicTable() {
   const [value, setValue] = React.useState();
-
+  // console.log({rowValue})
   const history = useHistory();
 
   const groupPage = () => {
     history.push('/groupDetails');
   };
+
+  const getRowData = item => {
+    window.localStorage.setItem("foId",item.foId) 
+  }
+
+  const handleOnRowClick = item => {
+    groupPage();
+    getRowData(item);
+
+  }
 
   const [searched, setSearched] = useState('');
   // const [rows, setRows] = useState(originalRows);
@@ -126,7 +136,7 @@ export default function BasicTable() {
               <TableBody>
                 {data.map((list) => (
                   <TableRow
-                    onClick={groupPage}
+                    onClick={() => handleOnRowClick(list)}
                     hover={true}
                     key = {list.foName} // key={row.name}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
