@@ -18,22 +18,6 @@ import AttendanceBox from '../attendance/attendance';
 import CollectionWidget from '../collectionWidget/collectionWidget';
 import CashDetails from '../cashDetails/cashDetails';
 import userService from '../../service/user.service';
-  // function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
-  //   return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
-  // }
-
-// const originalRows = [
-//   createData('Walter White', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('Willy Wonka', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('Chinrasu', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('PABLO ESCOBAR', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('KIM JONG UN', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('UnGoppan', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('Michael Rayappan', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('Lalgudi Karuppiah Gandhi', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('GigaCHAD', 420, 0, 6090, 0, 'NA', 'NA', 0),
-//   createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0),
-// ];
 
 export default function BasicTable() {
   const [value, setValue] = React.useState();
