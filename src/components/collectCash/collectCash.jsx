@@ -7,20 +7,7 @@ import { Grid } from '@material-ui/core';
 import Divider from '@mui/material/Divider';
 import { Typography } from '@mui/material';
 import userService from '../../service/user.service';
-import { CollectionsOutlined } from '@material-ui/icons';
-
 export default function CollectCash() {
-  function createData(name, payment, amount) {
-    return { name, payment, amount };
-  }
-  const rows = [
-    createData('Walter White', 'Full Payment', 6900),
-    createData('Walter White Jr', 'No Payment', 0),
-    createData('Skyler White', 'Partial Payment', 4200),
-    createData('Walter White', 'Full Payment', 6900),
-    createData('Walter White Jr', 'No Payment', 0),
-    createData('Skyler White', 'Partial Payment', 4200),
-  ];
 
   const [value, setValue] = useState([]);
   const [value1, setValue1] = useState([]);
@@ -67,7 +54,7 @@ export default function CollectCash() {
         <br />
       </div>
       <div style={{ backgroundColor: 'silver', backgroundSize: '40' }}>
-        <Typography sx={{ ml: 1 }} variant="h5">
+        <Typography component={'span'} sx={{ ml: 1 }} variant="h5">
           Customers
         </Typography>
       </div>

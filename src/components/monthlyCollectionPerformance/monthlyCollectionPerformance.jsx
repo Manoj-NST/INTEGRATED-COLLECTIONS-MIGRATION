@@ -29,7 +29,7 @@ export default function SimpleAccordion() {
     <div>
       <Accordion defaultExpanded={true}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Typography>
+          <Typography component={'span'}>
             <b>Current_Month's</b> Collection Performance
           </Typography>
         </AccordionSummary>

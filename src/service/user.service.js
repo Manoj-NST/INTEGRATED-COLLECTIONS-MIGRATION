@@ -1,11 +1,12 @@
 import axios from "axios";
 import { environment } from "../environments/environment";
 // import { getUser } from "./auth.service";
-import helperService from "./helper.service";
+import { getFO, getGroup } from "./auth.service";
+// import helperService from "./helper.service";
 class UserService {
 
     getFoInfo(){
-        return axios.get(`${environment.apiUrl}/fieldofficer/fo-info?foId=${localStorage.getItem("foId")}`);
+        return axios.get(`${environment.apiUrl}/fieldofficer/fo-info?foId=${getFO().foId}`);
     }
 
     getDashboardMonthlyCollections() {
@@ -30,14 +31,20 @@ class UserService {
     }
 
     getDashboardGroupDetails() {
-        return axios.get(`${environment.apiUrl}/collection/dashboard-group-details?fromDate=2022-09-09&toDate=2022-09-09&foId=${localStorage.getItem("foId")}&page=1&limit=1000`)
+        return axios.get(`${environment.apiUrl}/collection/dashboard-group-details?fromDate=2022-09-09&toDate=2022-09-09&foId=${getFO().foId}&page=1&limit=1000`)
     }
 
     getCollectCash() {
-        return axios.get(`${environment.apiUrl}/collection/collect-cash?fromDate=2022-09-09&toDate=2022-09-09&foId=${localStorage.getItem("foId")}`)
+        return axios.get(`${environment.apiUrl}/collection/collect-cash?fromDate=2022-09-09&toDate=2022-09-09&foId=${getFO().foId}`)
     }
 
-    
+    getMemberDetails() {
+        return axios.get(`${environment.apiUrl}/groups/getemidetailsbyid?groupId=${getGroup().groupId}`)
+    }
+
+    getTransactionDetails() {
+        return axios.get(`${environment.apiUrl}/payments/gettransactions?groupId=${getGroup().groupId}&fromDate=2022-09-1&toDate=2022-09-1`)
+    }
 
 }
 

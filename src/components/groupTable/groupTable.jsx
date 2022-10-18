@@ -19,29 +19,14 @@ import CollectionWidget from '../collectionWidget/collectionWidget';
 import MemberDetails from '../memberDetails/memberDetails';
 import userService from '../../service/user.service';
 
-function createData(name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch) {
-  return { name, noOfCustomers, collected, dpd, rescheduled, target, pending, givenAtBranch };
-}
-
-const originalRows = [
-  createData('Walter White', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Willy Wonka', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('PABLO ESCOBAR', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('KIM JONG UN', 420, 0, 6090, 0, 'NA', 'NA', 0),
-  createData('Shaquile O Neal', 420, 0, 6090, 0, 'NA', 'NA', 0),
-];
 
 export default function GroupTable() {
   const [value, setValue] = React.useState();
 
   const [searched, setSearched] = useState('');
-  const [rows, setRows] = useState(originalRows);
 
   const requestSearch = (searchedVal) => {
-    const filteredRows = originalRows.filter((row) => {
-      return row.name.toLowerCase().includes(searchedVal.toLowerCase());
-    });
-    setRows(filteredRows);
+
   };
   const cancelSearch = () => {
     setSearched('');
@@ -50,11 +35,16 @@ export default function GroupTable() {
 
   //   SIDEBAR / DRAWER
   const [state, setState] = React.useState({});
-  const toggleDrawer = (anchor, open) => (event) => {
+  const toggleDrawer = (anchor, open, details) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
     setState({ ...state, [anchor]: open });
+    window.localStorage.setItem("group",JSON.stringify(details))
+    if(open === false){
+      localStorage.removeItem("group")
+    }
+    
   };
   const list = (anchor) => (
     <Box sx={{ minWidth: 400 }} onClick={toggleDrawer(anchor, false)}>
@@ -116,12 +106,12 @@ export default function GroupTable() {
             </TableHead>
             <TableBody>
               {data.map((details) => (
-                <React.Fragment key={'right'}>
+                <React.Fragment key={details.groupId}>
                   <TableRow
                     hover={true}
                     key={details.groupName}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    onClick={toggleDrawer('right', true)}
+                    onClick={toggleDrawer('right', true, details)}
                   >
                     <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)} BackdropProps={{ invisible: true }}>
                       {list('right')}

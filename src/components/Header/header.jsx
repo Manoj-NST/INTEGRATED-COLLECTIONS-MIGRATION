@@ -102,7 +102,7 @@ const ResponsiveAppBar = () => {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography component={'span'} textAlign="center">{page}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -138,7 +138,7 @@ const ResponsiveAppBar = () => {
                 onClose={handleCloseUserMenu}
               >
                 <MenuItem key="logout" onClick={logOut}>
-                  <Typography textAlign="center">Logout</Typography>
+                  <Typography component={'span'} textAlign="center">Logout</Typography>
                 </MenuItem>
               </Menu>
             </Box>

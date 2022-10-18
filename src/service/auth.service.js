@@ -31,6 +31,18 @@ export const getUser = () => {
     else return null;
 }
 
+export const getGroup = () => {
+    const grpStr = localStorage.getItem('group');
+    if (grpStr) return JSON.parse(grpStr);
+    else return null;
+}
+
+export const getFO = () => {
+    const foStr = localStorage.getItem('fo');
+    if (foStr) return JSON.parse(foStr);
+    else return null;
+}
+
 export const getToken = () => {
     // UserService.getFoInfo().then(
     //     res => {

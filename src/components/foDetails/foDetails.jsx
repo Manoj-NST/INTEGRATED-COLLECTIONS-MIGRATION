@@ -31,7 +31,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
     </div>
@@ -154,7 +154,7 @@ export default function FullWidthTabs() {
                   horizontal: 'left',
                 }}
               >
-                <Typography sx={{ p: 2 }}>
+                <Typography component={'span'} sx={{ p: 2 }}>
                   {['right'].map((anchor) => (
                     <React.Fragment key={anchor}>
                       <Button style={{ color: 'black' }} onClick={toggleDrawer(anchor, true)}>

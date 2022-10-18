@@ -45,7 +45,7 @@ export default function BasicTable() {
   };
 
   const getRowData = item => {
-    window.localStorage.setItem("foId",item.foId) 
+    window.localStorage.setItem("fo",JSON.stringify(item)) 
   }
 
   const handleOnRowClick = item => {

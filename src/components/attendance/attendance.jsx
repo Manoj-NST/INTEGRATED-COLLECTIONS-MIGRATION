@@ -11,7 +11,7 @@ export default function AttendanceBox() {
     <div>
       <Accordion defaultExpanded={true}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Typography>
+          <Typography component={'span'}>
             <b>Attendance</b>
           </Typography>
         </AccordionSummary>

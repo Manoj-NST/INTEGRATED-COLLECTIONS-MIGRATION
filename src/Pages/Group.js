@@ -26,7 +26,7 @@ export default function GroupDetails() {
           <br />
           <br />
           <Button variant="filled" color="neutral" onClick={homePage}>
-            <Typography fontSize="large">
+            <Typography component={'span'} fontSize="large">
               <ArrowBackIcon fontSize='large' />
             </Typography>
           </Button>

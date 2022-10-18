@@ -38,7 +38,7 @@ export default function CashDetails() {
     <div>
       <Accordion defaultExpanded={true}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-          <Typography>
+          <Typography component={'span'}>
             <b>Cash Details</b>
           </Typography>
         </AccordionSummary>
